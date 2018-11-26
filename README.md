@@ -37,7 +37,7 @@ $ flutter packages get
 ```
 * Code Flutter to translate text 
 ```
-IamOptions options = await IamOptions(iam_api_key: "Your ApiKey", url: "Your Url").build();
+IamOptions options = await IamOptions(iamApiKey: "Your ApiKey", url: "Your Url").build();
 LanguageTranslator service = new LanguageTranslator(iamOptions: options);
 TranslationResult translationResult = await service.translate("Your Text", Language.ENGLISH, Language.SPANISH);
 print(translationResult);
@@ -45,7 +45,7 @@ print(translationResult);
 * Example
 ```
 void languageTranslator(String text) async {
-    IamOptions options = await IamOptions(iam_api_key: "fr8sBBKkjZidQJij6sadfxAwqwqe4S8yY_fdXmSrKZoH_F8LB", url: "https://gateway-syd.watsonplatform.net/language-translator/api").build();
+    IamOptions options = await IamOptions(iamApiKey: "fr8sBBKkjZidQJij6sadfxAwqwqe4S8yY_fdXmSrKZoH_F8LB", url: "https://gateway-syd.watsonplatform.net/language-translator/api").build();
     LanguageTranslator service = new LanguageTranslator(iamOptions: options);
     TranslationResult translationResult = await service.translate(text, Language.ENGLISH, Language.SPANISH);
     print(translationResult);
@@ -53,7 +53,7 @@ void languageTranslator(String text) async {
 ```
 *Code Flutter to identify language
 ```
-IamOptions options = await IamOptions(iam_api_key: "Your ApiKey", url: "Your Url").build();
+IamOptions options = await IamOptions(iamApiKey: "Your ApiKey", url: "Your Url").build();
 LanguageTranslator service = new LanguageTranslator(iamOptions: options);
 IdentifyLanguageResult identifyLanguageResult = await service.identifylanguage("You text to identify");
 print(identifyLanguageResult);
@@ -61,7 +61,7 @@ print(identifyLanguageResult);
 * Example
 ```
 void identifyLanguage(String text) async {
-    IamOptions options = await IamOptions(iam_api_key: "fr8sBBKkjZidQJij6sadfxAwqwqe4S8yY_fdXmSrKZoH_F8LB", url: "https://gateway-syd.watsonplatform.net/language-translator/api").build();
+    IamOptions options = await IamOptions(iamApiKey: "fr8sBBKkjZidQJij6sadfxAwqwqe4S8yY_fdXmSrKZoH_F8LB", url: "https://gateway-syd.watsonplatform.net/language-translator/api").build();
     LanguageTranslator service = new LanguageTranslator(iamOptions: this.options);
     IdentifyLanguageResult identifyLanguageResult = await service.identifylanguage(text);
     print(identifyLanguageResult);
@@ -83,7 +83,7 @@ void identifyLanguage(String text) async {
 ```
 * Code Flutter for Visual Recognition Image Url
 ```
-IamOptions options = await IamOptions(iam_api_key: "Your ApiKey", url: "Your Url").build();
+IamOptions options = await IamOptions(iamApiKey: "Your ApiKey", url: "Your Url").build();
 VisualRecognition visualRecognition = new VisualRecognition(iamOptions: this.options, language: Language.ENGLISH); // Language.ENGLISH is language response 
 ClassifiedImages classifiedImages = await visualRecognition.classifyImageUrl("Your Image URLS");
 print(classifiedImages.getImages()[0].getClassifiers()[0].getClasses()[0].className);
@@ -91,7 +91,7 @@ print(classifiedImages.getImages()[0].getClassifiers()[0].getClasses()[0].classN
 * Example
 ```
 void visualRecognitionUrl(String url) async {
-    IamOptions options = await IamOptions(iam_api_key: "PtrAMdthejasdsaqqweXpRSs3gxwQAdsasdRPNzLEnLQ", url: "https://gateway.watsonplatform.net/visual-recognition/api").build();
+    IamOptions options = await IamOptions(iamApiKey: "PtrAMdthejasdsaqqweXpRSs3gxwQAdsasdRPNzLEnLQ", url: "https://gateway.watsonplatform.net/visual-recognition/api").build();
     VisualRecognition visualRecognition = new VisualRecognition(iamOptions: this.options, language: Language.ENGLISH);
     ClassifiedImages classifiedImages = await visualRecognition.classifyImageUrl(url);
     print(classifiedImages
@@ -103,7 +103,7 @@ void visualRecognitionUrl(String url) async {
 ```
 * Visual Recognition File
 ```
-IamOptions options = await IamOptions(iam_api_key: "Your ApiKey", url: "Your Url").build();
+IamOptions options = await IamOptions(iamApiKey: "Your ApiKey", url: "Your Url").build();
 VisualRecognition visualRecognition = new VisualRecognition(iamOptions: this.options, language: Language.ENGLISH); // Language.ENGLISH is language response 
 ClassifiedImages classifiedImages = await visualRecognition.classifyImageFile("Image File Path");
 print(classifiedImages.getImages()[0].getClassifiers()[0].getClasses()[0].class_name);
@@ -111,7 +111,7 @@ print(classifiedImages.getImages()[0].getClassifiers()[0].getClasses()[0].class_
 * Example
 ```
 void visualRecognitionFile(File image) async {
-    IamOptions options = await IamOptions(iam_api_key: "PtrAMdthejasdsaqqweXpRSs3gxwQAdsasdRPNzLEnLQ", url: "https://gateway.watsonplatform.net/visual-recognition/api").build();
+    IamOptions options = await IamOptions(iamApiKey: "PtrAMdthejasdsaqqweXpRSs3gxwQAdsasdRPNzLEnLQ", url: "https://gateway.watsonplatform.net/visual-recognition/api").build();
     VisualRecognition visualRecognition = new VisualRecognition(
         iamOptions: this.options, language: Language.ENGLISH);
     ClassifiedImages classifiedImages =
