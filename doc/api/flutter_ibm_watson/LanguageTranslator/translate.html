@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="API docs for the translate method from the LanguageTranslator class, for the Dart programming language.">
+  <title>translate method - LanguageTranslator class - flutter_ibm_watson library - Dart API</title>
+  <!-- required because all the links are pseudo-absolute -->
+  <base href="../..">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link rel="stylesheet" href="static-assets/github.css">
+  <link rel="stylesheet" href="static-assets/styles.css">
+  <link rel="icon" href="static-assets/favicon.png">
+
+</head>
+
+<body>
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="index.html">flutter_ibm_watson</a></li>
+    <li><a href="flutter_ibm_watson/flutter_ibm_watson-library.html">flutter_ibm_watson</a></li>
+    <li><a href="flutter_ibm_watson/LanguageTranslator-class.html">LanguageTranslator</a></li>
+    <li class="self-crumb">translate method</li>
+  </ol>
+  <div class="self-name">translate</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <h5>LanguageTranslator class</h5>
+    <ol>
+      <li class="section-title"><a href="flutter_ibm_watson/LanguageTranslator-class.html#constructors">Constructors</a></li>
+      <li><a href="flutter_ibm_watson/LanguageTranslator/LanguageTranslator.html">LanguageTranslator</a></li>
+    
+      <li class="section-title">
+        <a href="flutter_ibm_watson/LanguageTranslator-class.html#instance-properties">Properties</a>
+      </li>
+      <li><a href="flutter_ibm_watson/LanguageTranslator/iamOptions.html">iamOptions</a></li>
+      <li><a href="flutter_ibm_watson/LanguageTranslator/modelId.html">modelId</a></li>
+      <li><a href="flutter_ibm_watson/LanguageTranslator/urlBase.html">urlBase</a></li>
+      <li><a href="flutter_ibm_watson/LanguageTranslator/version.html">version</a></li>
+      <li class="inherited"><a href="flutter_ibm_watson/LanguageTranslator/hashCode.html">hashCode</a></li>
+      <li class="inherited"><a href="flutter_ibm_watson/LanguageTranslator/runtimeType.html">runtimeType</a></li>
+    
+      <li class="section-title"><a href="flutter_ibm_watson/LanguageTranslator-class.html#instance-methods">Methods</a></li>
+      <li><a href="flutter_ibm_watson/LanguageTranslator/identifylanguage.html">identifylanguage</a></li>
+      <li><a href="flutter_ibm_watson/LanguageTranslator/translate.html">translate</a></li>
+      <li class="inherited"><a href="flutter_ibm_watson/LanguageTranslator/noSuchMethod.html">noSuchMethod</a></li>
+      <li class="inherited"><a href="flutter_ibm_watson/LanguageTranslator/toString.html">toString</a></li>
+    
+      <li class="section-title inherited"><a href="flutter_ibm_watson/LanguageTranslator-class.html#operators">Operators</a></li>
+      <li class="inherited"><a href="flutter_ibm_watson/LanguageTranslator/operator_equals.html">operator ==</a></li>
+    
+    
+    
+    </ol>
+  </div><!--/.sidebar-offcanvas-->
+
+  <div class="col-xs-12 col-sm-9 col-md-8 main-content">
+    <h1>translate method</h1>
+
+    <section class="multi-line-signature">
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="flutter_ibm_watson/TranslationResult-class.html">TranslationResult</a></span>&gt;</span></span>
+      <span class="name ">translate</span>
+(<wbr><span class="parameter" id="translate-param-text"><span class="type-annotation">String</span> <span class="parameter-name">text</span>, </span> <span class="parameter" id="translate-param-source"><span class="type-annotation">String</span> <span class="parameter-name">source</span>, </span> <span class="parameter" id="translate-param-target"><span class="type-annotation">String</span> <span class="parameter-name">target</span></span>)
+    </section>
+    
+    <section class="summary source-code" id="source">
+      <h2><span>Implementation</span> </h2>
+      <pre class="language-dart"><code class="language-dart">Future&lt;TranslationResult&gt; translate(
+    String text, String source, String target) async {
+  String token = this.iamOptions.accessToken;
+  modelId = source + &quot;-&quot; + target;
+  var response = await http.post(
+    _getUrl(&quot;translate&quot;),
+    headers: {
+      HttpHeaders.authorizationHeader: &quot;Bearer $token&quot;,
+      HttpHeaders.acceptHeader: &quot;application&#47;json&quot;,
+      HttpHeaders.contentTypeHeader: &quot;application&#47;json&quot;,
+    },
+    body: &#39;{\&quot;text\&quot;:[\&quot;$text\&quot;],\&quot;model_id\&quot;:\&quot;$modelId\&quot;}&#39;,
+  ).timeout(const Duration(seconds: 360));
+  return new TranslationResult(json.decode(response.body));
+}</code></pre>
+    </section>
+
+  </div> <!-- /.main-content -->
+
+  <div class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    flutter_ibm_watson 0.0.2
+  </span>
+
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="static-assets/typeahead.bundle.min.js"></script>
+<script src="static-assets/highlight.pack.js"></script>
+<script src="static-assets/URI.js"></script>
+<script src="static-assets/script.js"></script>
+
+
+</body>
+
+</html>

@@ -8,25 +8,25 @@ import 'dart:convert';
 import 'dart:io';
 
 class TranslationResult {
-  int word_count;
-  int character_count;
+  int wordCount;
+  int characterCount;
   dynamic translations;
 
   TranslationResult(Map result) {
     translations = result["translations"];
-    word_count = result["word_count"];
-    character_count = result["character_count"];
+    wordCount = result["word_count"];
+    characterCount = result["character_count"];
   }
 
   String toString() {
     return translations[0]["translation"];
   }
 
-  int get_word_count() {
-    return this.word_count;
+  int getWordCount() {
+    return this.wordCount;
   }
 
-  int get_character_count() {
+  int getCharacterCount() {
     return this.translations;
   }
 }
@@ -40,7 +40,7 @@ class ItemIdentifyLanguageResult {
   @override
   String toString() {
     // TODO: implement toString
-    return JSON.encode({"language":this.language,"condidence":this.confidence});
+    return json.encode({"language":this.language,"condidence":this.confidence});
   }
 }
 
@@ -74,8 +74,8 @@ class IdentifyLanguageResult {
 }
 
 class LanguageTranslator {
-  String URL = "https://gateway.watsonplatform.net/language-translator/api";
-  String model_id;
+  String urlBase = "https://gateway.watsonplatform.net/language-translator/api";
+  String modelId;
   final String version;
   IamOptions iamOptions;
 
@@ -87,45 +87,45 @@ class LanguageTranslator {
   String _getUrl(method) {
     String url = iamOptions.url;
     if (iamOptions.url == "" || iamOptions.url == null) {
-      url = URL;
+      url = urlBase;
     }
     return "$url/v3/$method?version=$version";
   }
 
   Future<TranslationResult> translate(
       String text, String source, String target) async {
-    String token = this.iamOptions.access_token;
-    model_id = source + "-" + target;
+    String token = this.iamOptions.accessToken;
+    modelId = source + "-" + target;
     var response = await http.post(
       _getUrl("translate"),
       headers: {
-        HttpHeaders.AUTHORIZATION: "Bearer $token",
-        HttpHeaders.ACCEPT: "application/json",
-        HttpHeaders.CONTENT_TYPE: "application/json",
+        HttpHeaders.authorizationHeader: "Bearer $token",
+        HttpHeaders.acceptHeader: "application/json",
+        HttpHeaders.contentTypeHeader: "application/json",
       },
-      body: '{\"text\":[\"$text\"],\"model_id\":\"$model_id\"}',
-    );
-    return new TranslationResult(JSON.decode(response.body));
+      body: '{\"text\":[\"$text\"],\"model_id\":\"$modelId\"}',
+    ).timeout(const Duration(seconds: 360));
+    return new TranslationResult(json.decode(response.body));
   }
 
   Future<IdentifyLanguageResult> identifylanguage(String text) async {
     IdentifyLanguageResult identifyLanguageResult =
         new IdentifyLanguageResult();
-    String token = this.iamOptions.access_token;
+    String token = this.iamOptions.accessToken;
     var response = await http.post(
       _getUrl("identify"),
       headers: {
-        HttpHeaders.AUTHORIZATION: "Bearer $token",
-        HttpHeaders.ACCEPT: "application/json",
-        HttpHeaders.CONTENT_TYPE: "text/plain",
+        HttpHeaders.authorizationHeader: "Bearer $token",
+        HttpHeaders.acceptHeader: "application/json",
+        HttpHeaders.contentTypeHeader: "text/plain",
       },
       body: text,
-    );
-    Map result = JSON.decode(response.body);
+    ).timeout(const Duration(seconds: 360));
+    Map result = json.decode(response.body);
     dynamic languages = result["languages"];
-    List<dynamic> list_languages = languages;
-    for (int i = 0; i < list_languages.length; i++) {
-      Map language = list_languages[0];
+    List<dynamic> listLanguages = languages;
+    for (int i = 0; i < listLanguages.length; i++) {
+      Map language = listLanguages[0];
       identifyLanguageResult.add(new ItemIdentifyLanguageResult(
           confidence: language["confidence"], language: language["language"]));
     }

@@ -100,14 +100,15 @@ class _ScreenLanguageTranslator extends State<ScreenLanguageTranslator> {
 
   Future<Null> getOptions() async {
     this.options = await IamOptions(
-            iam_api_key: "fr8sBBKkjZidQJij6HWaetAWAvzfdXmSrKZoHGF8LB",
+            iamApiKey: "fr8sBBKkjZidQJij6HWaetAWAvzfdXmSrKZoHGF8LB",
             url:
                 "https://gateway-syd.watsonplatform.net/language-translator/api")
         .build();
-    print(this.options.access_token);
+    print(this.options.accessToken);
   }
 
   void languageTranslator() async {
+    //await getOptions();
     LanguageTranslator service =
         new LanguageTranslator(iamOptions: this.options);
     TranslationResult translationResult =
@@ -202,10 +203,11 @@ class _ScreenVisualRecognition extends State<ScreenVisualRecognition> {
 
   Future<Null> getOptions() async {
     this.options = await IamOptions(
-            iam_api_key: "PtrgxzcADASVCXCjDmalrW1gXSADDgEt533gxwQAliAnvvjDDFmNHKNzgnLQ",
+            iamApiKey: "PtrgxzcADASVCXCjDmalrW1gXSADDgEt533gxwQAliAnvvjDDFmNHKNzgnLQ",
             url: "https://gateway.watsonplatform.net/visual-recognition/api")
         .build();
-    print(this.options.access_token);
+    print(this.options.accessToken);
+    print(this.options);
   }
 
   @override
@@ -216,6 +218,7 @@ class _ScreenVisualRecognition extends State<ScreenVisualRecognition> {
   }
 
   void visualRecognitionUrl() async {
+    //await getOptions();
     VisualRecognition visualRecognition = new VisualRecognition(
         iamOptions: this.options, language: Language.ENGLISH);
     ClassifiedImages classifiedImages =
@@ -224,18 +227,19 @@ class _ScreenVisualRecognition extends State<ScreenVisualRecognition> {
         .getImages()[0]
         .getClassifiers()[0]
         .getClasses()[0]
-        .class_name);
+        .className);
     setState(() {
       _text = classifiedImages.getImages()[0].getClassifiers()[0].toString();
       _text2 = classifiedImages
           .getImages()[0]
           .getClassifiers()[0]
           .getClasses()[0]
-          .class_name;
+          .className;
     });
   }
 
   void visualRecognitionFile() async {
+    //await getOptions();
     VisualRecognition visualRecognition = new VisualRecognition(
         iamOptions: this.options, language: Language.ENGLISH);
     ClassifiedImages classifiedImages =
@@ -245,14 +249,14 @@ class _ScreenVisualRecognition extends State<ScreenVisualRecognition> {
         .getImages()[0]
         .getClassifiers()[0]
         .getClasses()[0]
-        .class_name);
+        .className);
     setState(() {
       _text = classifiedImages.getImages()[0].getClassifiers()[0].toString();
       _text2 = classifiedImages
           .getImages()[0]
           .getClassifiers()[0]
           .getClasses()[0]
-          .class_name;
+          .className;
     });
   }
 

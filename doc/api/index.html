@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="made with love by dartdoc 0.21.1">
+  <meta name="description" content="flutter_ibm_watson API docs, for the Dart programming language.">
+  <title>flutter_ibm_watson - Dart API docs</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link rel="stylesheet" href="static-assets/github.css">
+  <link rel="stylesheet" href="static-assets/styles.css">
+  <link rel="icon" href="static-assets/favicon.png">
+
+</head>
+
+<body>
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="https://github.com/VictorRancesCode/flutter_ibm_watson">flutter_ibm_watson package</a></li>
+  </ol>
+  <div class="self-name">flutter_ibm_watson</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <h5><span class="package-name">flutter_ibm_watson</span> <span class="package-kind">package</span></h5>
+    <ol>
+          <li class="section-title">Libraries</li>
+          <li><a href="utils_IamOptions/utils_IamOptions-library.html">IamOptions</a></li>
+          <li><a href="utils_Language/utils_Language-library.html">Language</a></li>
+          <li><a href="visual-recognition_VisualRecognition/visual-recognition_VisualRecognition-library.html">VisualRecognition</a></li>
+          <li><a href="flutter_ibm_watson/flutter_ibm_watson-library.html">flutter_ibm_watson</a></li>
+          <li><a href="flutter_ibm_watson/flutter_ibm_watson-library.html">flutter_ibm_watson</a></li>
+    </ol>
+  </div>
+
+  <div class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <section class="desc markdown">
+        <h1 id="flutter-ibm-watson">Flutter Ibm Watson</h1>
+<p> <img alt="IBM Watson" src="https://github.com/VictorRancesCode/flutter_ibm_watson/raw/master/ibmwatson.png"> </p>
+<h2 id="installation">Installation</h2><ul><li>Add this to your package's pubspec.yaml file:</li></ul>
+<pre class="language-dart"><code>dependencies:
+  flutter_ibm_watson: ^0.0.1
+</code></pre><ul><li>You can install packages from the command line:
+with Flutter:</li></ul>
+<pre class="language-dart"><code>$ flutter packages get
+</code></pre><ul><li>Import it Now in your Dart code, you can use:</li></ul>
+<pre class="language-dart"><code> import 'package:flutter_ibm_watson/flutter_ibm_watson.dart';
+</code></pre>
+<h2 id="usage">Usage</h2>
+<h4 id="language-translator">Language Translator</h4><ul><li>Login or Register in <a href="https://console.bluemix.net/">IBM Bluemix</a></li><li><a href="https://console.bluemix.net/catalog/services/language-translator">IBM Watson Language Translator</a></li><li>Enter in Service Credentials and click in View credential</li><li>Copy apikey and url</li><li>Import </li></ul>
+<pre class="language-dart"><code>    import 'package:flutter_ibm_watson/flutter_ibm_watson.dart';
+    // or import
+    import 'package:flutter_ibm_watson/language_translator/LanguageTranslator.dart';
+    import 'package:flutter_ibm_watson/utils/Language.dart';
+    import 'package:flutter_ibm_watson/utils/IamOptions.dart';
+</code></pre><ul><li>Code Flutter to translate text </li></ul>
+<pre class="language-dart"><code>IamOptions options = await IamOptions(iam_api_key: "Your ApiKey", url: "Your Url").build();
+LanguageTranslator service = new LanguageTranslator(iamOptions: options);
+TranslationResult translationResult = await service.translate("Your Text", Language.ENGLISH, Language.SPANISH);
+print(translationResult);
+</code></pre><ul><li>Example</li></ul>
+<pre class="language-dart"><code>void languageTranslator(String text) async {
+    IamOptions options = await IamOptions(iam_api_key: "fr8sBBKkjZidQJij6sadfxAwqwqe4S8yY_fdXmSrKZoH_F8LB", url: "https://gateway-syd.watsonplatform.net/language-translator/api").build();
+    LanguageTranslator service = new LanguageTranslator(iamOptions: options);
+    TranslationResult translationResult = await service.translate(text, Language.ENGLISH, Language.SPANISH);
+    print(translationResult);
+}
+</code></pre>
+<p>*Code Flutter to identify language</p>
+<pre class="language-dart"><code>IamOptions options = await IamOptions(iam_api_key: "Your ApiKey", url: "Your Url").build();
+LanguageTranslator service = new LanguageTranslator(iamOptions: options);
+IdentifyLanguageResult identifyLanguageResult = await service.identifylanguage("You text to identify");
+print(identifyLanguageResult);
+</code></pre><ul><li>Example</li></ul>
+<pre class="language-dart"><code>void identifyLanguage(String text) async {
+    IamOptions options = await IamOptions(iam_api_key: "fr8sBBKkjZidQJij6sadfxAwqwqe4S8yY_fdXmSrKZoH_F8LB", url: "https://gateway-syd.watsonplatform.net/language-translator/api").build();
+    LanguageTranslator service = new LanguageTranslator(iamOptions: this.options);
+    IdentifyLanguageResult identifyLanguageResult = await service.identifylanguage(text);
+    print(identifyLanguageResult);
+}
+</code></pre>
+<h4 id="visual-recognition">Visual Recognition</h4><ul><li>Login or Register in <a href="https://console.bluemix.net/">IBM Bluemix</a></li><li><a href="https://console.bluemix.net/catalog/services/visual-recognition">IBM Watson Visual Recognition</a></li><li>Enter in Service Credentials and click in View credential</li><li>Copy apikey and url</li><li>Import </li></ul>
+<pre class="language-dart"><code>    import 'package:flutter_ibm_watson/flutter_ibm_watson.dart';
+    // or import
+    import 'package:flutter_ibm_watson/visual-recognition/VisualRecognition.dart';
+    import 'package:flutter_ibm_watson/utils/Language.dart';
+    import 'package:flutter_ibm_watson/utils/IamOptions.dart';
+</code></pre><ul><li>Code Flutter for Visual Recognition Image Url</li></ul>
+<pre class="language-dart"><code>IamOptions options = await IamOptions(iam_api_key: "Your ApiKey", url: "Your Url").build();
+VisualRecognition visualRecognition = new VisualRecognition(iamOptions: this.options, language: Language.ENGLISH); // Language.ENGLISH is language response 
+ClassifiedImages classifiedImages = await visualRecognition.classifyImageUrl("Your Image URLS");
+print(classifiedImages.getImages()[0].getClassifiers()[0].getClasses()[0].className);
+</code></pre><ul><li>Example</li></ul>
+<pre class="language-dart"><code>void visualRecognitionUrl(String url) async {
+    IamOptions options = await IamOptions(iam_api_key: "PtrAMdthejasdsaqqweXpRSs3gxwQAdsasdRPNzLEnLQ", url: "https://gateway.watsonplatform.net/visual-recognition/api").build();
+    VisualRecognition visualRecognition = new VisualRecognition(iamOptions: this.options, language: Language.ENGLISH);
+    ClassifiedImages classifiedImages = await visualRecognition.classifyImageUrl(url);
+    print(classifiedImages
+        .getImages()[0]
+        .getClassifiers()[0]
+        .getClasses()[0]
+        .className);
+}
+</code></pre><ul><li>Visual Recognition File</li></ul>
+<pre class="language-dart"><code>IamOptions options = await IamOptions(iam_api_key: "Your ApiKey", url: "Your Url").build();
+VisualRecognition visualRecognition = new VisualRecognition(iamOptions: this.options, language: Language.ENGLISH); // Language.ENGLISH is language response 
+ClassifiedImages classifiedImages = await visualRecognition.classifyImageFile("Image File Path");
+print(classifiedImages.getImages()[0].getClassifiers()[0].getClasses()[0].class_name);
+</code></pre><ul><li>Example</li></ul>
+<pre class="language-dart"><code>void visualRecognitionFile(File image) async {
+    IamOptions options = await IamOptions(iam_api_key: "PtrAMdthejasdsaqqweXpRSs3gxwQAdsasdRPNzLEnLQ", url: "https://gateway.watsonplatform.net/visual-recognition/api").build();
+    VisualRecognition visualRecognition = new VisualRecognition(
+        iamOptions: this.options, language: Language.ENGLISH);
+    ClassifiedImages classifiedImages =
+        await visualRecognition.classifyImageFile(image.path);
+
+    print(classifiedImages
+        .getImages()[0]
+        .getClassifiers()[0]
+        .getClasses()[0]
+        .className);
+}
+</code></pre>
+<h2 id="getting-started">Getting Started</h2>
+<p>For help getting started with Flutter, view our online <a href="https://flutter.io/">documentation</a>.</p>
+<p>For help on editing package code, view the <a href="https://flutter.io/developing-packages/">documentation</a>.</p>
+      </section>
+      
+        <section class="summary">
+            <h2>Libraries</h2>
+          <dl>
+            <dt id="IamOptions">
+              <span class="name"><a href="utils_IamOptions/utils_IamOptions-library.html">IamOptions</a></span> 
+            </dt>
+            <dd>
+              
+            </dd>            <dt id="Language">
+              <span class="name"><a href="utils_Language/utils_Language-library.html">Language</a></span> 
+            </dt>
+            <dd>
+              
+            </dd>            <dt id="VisualRecognition">
+              <span class="name"><a href="visual-recognition_VisualRecognition/visual-recognition_VisualRecognition-library.html">VisualRecognition</a></span> 
+            </dt>
+            <dd>
+              
+            </dd>            <dt id="flutter_ibm_watson">
+              <span class="name"><a href="flutter_ibm_watson/flutter_ibm_watson-library.html">flutter_ibm_watson</a></span> 
+            </dt>
+            <dd>
+              
+            </dd>            <dt id="flutter_ibm_watson">
+              <span class="name"><a href="flutter_ibm_watson/flutter_ibm_watson-library.html">flutter_ibm_watson</a></span> 
+            </dt>
+            <dd>
+              
+            </dd>          </dl>
+        </section>
+
+  </div> <!-- /.main-content -->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    flutter_ibm_watson 0.0.2
+  </span>
+
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="static-assets/typeahead.bundle.min.js"></script>
+<script src="static-assets/highlight.pack.js"></script>
+<script src="static-assets/URI.js"></script>
+<script src="static-assets/script.js"></script>
+
+
+</body>
+
+</html>

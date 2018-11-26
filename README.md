@@ -1,4 +1,4 @@
-# flutter_ibm_watson
+# Flutter Ibm Watson 
 
  ![IBM Watson](https://github.com/VictorRancesCode/flutter_ibm_watson/raw/master/ibmwatson.png) 
 
@@ -7,7 +7,7 @@
 * Add this to your package's pubspec.yaml file:
 ```
 dependencies:
-  flutter_ibm_watson: "^0.0.1"
+  flutter_ibm_watson: ^0.0.1
 ```
 * You can install packages from the command line:
   with Flutter:
@@ -86,7 +86,7 @@ void identifyLanguage(String text) async {
 IamOptions options = await IamOptions(iam_api_key: "Your ApiKey", url: "Your Url").build();
 VisualRecognition visualRecognition = new VisualRecognition(iamOptions: this.options, language: Language.ENGLISH); // Language.ENGLISH is language response 
 ClassifiedImages classifiedImages = await visualRecognition.classifyImageUrl("Your Image URLS");
-print(classifiedImages.getImages()[0].getClassifiers()[0].getClasses()[0].class_name);
+print(classifiedImages.getImages()[0].getClassifiers()[0].getClasses()[0].className);
 ```
 * Example
 ```
@@ -98,7 +98,7 @@ void visualRecognitionUrl(String url) async {
         .getImages()[0]
         .getClassifiers()[0]
         .getClasses()[0]
-        .class_name);
+        .className);
 }
 ```
 * Visual Recognition File
@@ -121,7 +121,7 @@ void visualRecognitionFile(File image) async {
         .getImages()[0]
         .getClassifiers()[0]
         .getClasses()[0]
-        .class_name);
+        .className);
 }
 ```
 

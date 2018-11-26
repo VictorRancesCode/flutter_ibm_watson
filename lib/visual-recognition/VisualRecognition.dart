@@ -9,38 +9,38 @@ import 'package:http_parser/http_parser.dart';
 import 'package:meta/meta.dart';
 
 class ClassResult {
-  String class_name;
+  String className;
   double score;
-  String type_hierarchy;
+  String typeHierarchy;
 
   ClassResult(Map result) {
-    this.class_name = result["class"] ?? "";
+    this.className = result["class"] ?? "";
     this.score = result["score"] ?? "";
-    this.type_hierarchy = result["type_hierarchy"] ?? "";
+    this.typeHierarchy = result["type_hierarchy"] ?? "";
   }
 
   @override
   String toString() {
     // TODO: implement toString
-    return JSON.encode(toJson());
+    return json.encode(toJson());
   }
 
   dynamic toJson() {
     return {
-      "class": this.class_name,
+      "class": this.className,
       "score": this.score,
-      "type_hierarchy": this.type_hierarchy
+      "type_hierarchy": this.typeHierarchy
     };
   }
 }
 
 class ClassifierResult {
-  String _classifier_id;
+  String _classifierId;
   String _name;
   List<ClassResult> _classes;
 
   ClassifierResult(Map item) {
-    this._classifier_id = item["classifier_id"] ?? "";
+    this._classifierId = item["classifier_id"] ?? "";
     this._name = item["name"] ?? "";
     _classes = new List<ClassResult>();
     for (Map result in item["classes"]) {
@@ -51,10 +51,10 @@ class ClassifierResult {
   @override
   String toString() {
     // TODO: implement toString
-    return JSON.encode({
-      "classifier_id": this._classifier_id,
+    return json.encode({
+      "classifier_id": this._classifierId,
       "name": this._name,
-      "classes": JSON.decode(this._classes.toString())
+      "classes": json.decode(this._classes.toString())
     });
   }
 
@@ -62,27 +62,27 @@ class ClassifierResult {
     return this._classes;
   }
 
-  String get_classifier_id() {
-    return this._classifier_id;
+  String getClassifierId() {
+    return this._classifierId;
   }
 
-  String get_classifier_name() {
+  String getClassifierName() {
     return this._name;
   }
 }
 
 class ClassifiedImage {
   List<ClassifierResult> _classifiers;
-  String source_url;
-  String resolved_url;
+  String sourceUrl;
+  String resolvedUrl;
   String image;
 
-  ClassifiedImage(Map result_image) {
-    this.source_url = result_image["source_url"] ?? "";
-    this.resolved_url = result_image["resolved_url"] ?? "";
-    this.image = result_image["image"] ?? "";
+  ClassifiedImage(Map resultImage) {
+    this.sourceUrl = resultImage["source_url"] ?? "";
+    this.resolvedUrl = resultImage["resolved_url"] ?? "";
+    this.image = resultImage["image"] ?? "";
     _classifiers = new List<ClassifierResult>();
-    for (Map item in result_image["classifiers"]) {
+    for (Map item in resultImage["classifiers"]) {
       _classifiers.add(new ClassifierResult(item));
     }
   }
@@ -94,10 +94,10 @@ class ClassifiedImage {
   @override
   String toString() {
     // TODO: implement toString
-    return JSON.encode({
-      "classifiers": JSON.decode(this._classifiers.toString()),
-      "source_url": this.source_url,
-      "resolved_url": this.resolved_url,
+    return json.encode({
+      "classifiers": json.decode(this._classifiers.toString()),
+      "source_url": this.sourceUrl,
+      "resolved_url": this.resolvedUrl,
       "image": this.image
     });
   }
@@ -105,12 +105,12 @@ class ClassifiedImage {
 
 class ClassifiedImages {
   List<ClassifiedImage> _images;
-  int images_processed;
-  int custom_classes;
+  int imagesProcessed;
+  int customClasses;
 
   ClassifiedImages(Map response) {
-    this.images_processed = response["images_processed"] ?? "";
-    this.custom_classes = response["custom_classes"] ?? "";
+    this.imagesProcessed = response["images_processed"] ?? "";
+    this.customClasses = response["custom_classes"] ?? "";
     this._images = new List<ClassifiedImage>();
     for (Map image in response["images"]) {
       _images.add(new ClassifiedImage(image));
@@ -124,10 +124,10 @@ class ClassifiedImages {
   @override
   String toString() {
     // TODO: implement toString
-    return JSON.encode({
-      "images": JSON.decode(this._images.toString()),
-      "images_processed": this.images_processed,
-      "custom_classes": this.custom_classes
+    return json.encode({
+      "images": json.decode(this._images.toString()),
+      "images_processed": this.imagesProcessed,
+      "custom_classes": this.customClasses
     });
   }
 }
@@ -154,15 +154,15 @@ class VisualRecognition {
   }
 
   Future<ClassifiedImages> classifyImageUrl(String url) async {
-    String token = this.iamOptions.access_token;
+    String token = this.iamOptions.accessToken;
     var response = await http.get(
       _getUrl("classify", url),
       headers: {
-        HttpHeaders.AUTHORIZATION: "Bearer $token",
-        HttpHeaders.ACCEPT_LANGUAGE: this.language ?? Language.ENGLISH,
+        HttpHeaders.authorizationHeader: "Bearer $token",
+        HttpHeaders.acceptLanguageHeader: this.language ?? Language.ENGLISH,
       },
-    );
-    return ClassifiedImages(JSON.decode(response.body));
+    ).timeout(const Duration(seconds: 360));
+    return ClassifiedImages(json.decode(response.body));
   }
 
   String _getUrlFile(String method) {
@@ -175,7 +175,7 @@ class VisualRecognition {
 
   Future<ClassifiedImages> classifyImageFile(String filePath) async {
     ClassifiedImages classifiedImages;
-    String token = this.iamOptions.access_token;
+    String token = this.iamOptions.accessToken;
     var request =
         new http.MultipartRequest("POST", Uri.parse(_getUrlFile("classify")));
     request.fields['threshold'] = this.threshold.toString();
@@ -183,12 +183,12 @@ class VisualRecognition {
         contentType: new MediaType('application', '*'));
     request.files.add(file);
     request.headers.addAll({
-      HttpHeaders.AUTHORIZATION: "Bearer $token",
-      HttpHeaders.ACCEPT_LANGUAGE: this.language ?? Language.ENGLISH,
+      HttpHeaders.authorizationHeader: "Bearer $token",
+      HttpHeaders.acceptLanguageHeader: this.language ?? Language.ENGLISH,
     });
     var response = await request.send();
     await response.stream.transform(utf8.decoder).listen((value) {
-      dynamic result = JSON.decode(value);
+      dynamic result = json.decode(value);
       classifiedImages = new ClassifiedImages(result);
     });
     return classifiedImages;
