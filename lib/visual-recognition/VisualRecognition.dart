@@ -69,6 +69,19 @@ class ClassifierResult {
   String getClassifierName() {
     return this._name;
   }
+
+  ClassResult getHigherScore(){
+    double x=0;
+    ClassResult result;
+    for (ClassResult item in _classes) {
+      if(item.score>x){
+        x= item.score;
+        result=item;
+      }
+    }
+    return result;
+  }
+
 }
 
 class ClassifiedImage {
@@ -187,10 +200,15 @@ class VisualRecognition {
       HttpHeaders.acceptLanguageHeader: this.language ?? Language.ENGLISH,
     });
     var response = await request.send();
-    await response.stream.transform(utf8.decoder).listen((value) {
+    /*await response.stream.transform(utf8.decoder).listen((value) async {
+      print(value);
       dynamic result = json.decode(value);
       classifiedImages = new ClassifiedImages(result);
-    });
+    });*/
+    var responseData = await response.stream.toBytes();
+    var responseString = String.fromCharCodes(responseData);
+    dynamic result = json.decode(responseString);
+    classifiedImages = new ClassifiedImages(result);
     return classifiedImages;
   }
 }

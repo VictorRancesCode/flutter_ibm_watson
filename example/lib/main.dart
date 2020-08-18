@@ -203,8 +203,9 @@ class _ScreenVisualRecognition extends State<ScreenVisualRecognition> {
 
   Future<Null> getOptions() async {
     this.options = await IamOptions(
-            iamApiKey: "PtrgxzcADASVCXCjDmalrW1gXSADDgEt533gxwQAliAnvvjDDFmNHKNzgnLQ",
-            url: "https://gateway.watsonplatform.net/visual-recognition/api")
+            iamApiKey: "Your Api Key",
+            url:
+                "https://api.us-south.visual-recognition.watson.cloud.ibm.com/instances/d9b2881c-9dba-4d68-b52f-c1e54d08f471")
         .build();
     print(this.options.accessToken);
     print(this.options);
@@ -250,21 +251,28 @@ class _ScreenVisualRecognition extends State<ScreenVisualRecognition> {
         .getClassifiers()[0]
         .getClasses()[0]
         .className);
+    print(classifiedImages
+        .getImages()[0]
+        .getClassifiers()[0]
+        .getHigherScore()
+        .className);
+    ClassResult r =classifiedImages
+        .getImages()[0]
+        .getClassifiers()[0]
+        .getHigherScore();
     setState(() {
       _text = classifiedImages.getImages()[0].getClassifiers()[0].toString();
-      _text2 = classifiedImages
-          .getImages()[0]
-          .getClassifiers()[0]
-          .getClasses()[0]
-          .className;
+      _text2 =r.className+" "+r.score.toString();
     });
   }
 
+  final picker = ImagePicker();
+
   Future getPhoto() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+    var image = await picker.getImage(source: ImageSource.camera);
 
     setState(() {
-      _image = image;
+      _image = File(image.path);
     });
   }
 
