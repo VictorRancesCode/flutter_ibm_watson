@@ -203,7 +203,7 @@ class _ScreenVisualRecognition extends State<ScreenVisualRecognition> {
 
   Future<Null> getOptions() async {
     this.options = await IamOptions(
-            iamApiKey: "Your Api Key",
+            iamApiKey: "Your ApiKey",
             url:
                 "https://api.us-south.visual-recognition.watson.cloud.ibm.com/instances/d9b2881c-9dba-4d68-b52f-c1e54d08f471")
         .build();
