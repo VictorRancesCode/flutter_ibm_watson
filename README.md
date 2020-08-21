@@ -125,6 +125,42 @@ void visualRecognitionFile(File image) async {
 }
 ```
 
+#### Text To Speech
+* Login or Register in [IBM Bluemix](https://console.bluemix.net/)
+* [IBM Watson Text To Speech](https://cloud.ibm.com/catalog/services/text-to-speech)
+* Enter in Service Credentials and click in View credential
+* Copy ApiKey and url
+* Import 
+```
+  import 'package:flutter_ibm_watson/flutter_ibm_watson.dart';
+  or
+  import 'package:flutter_ibm_watson/services/textToSpeech.dart';
+  import 'package:flutter_ibm_watson/utils/IamOptions.dart';
+```
+* Code Flutter to text to speech
+```
+IamOptions options = await IamOptions(iamApiKey: "Your ApiKey", url: "Your Url").build();
+TextToSpeech service = new TextToSpeech(iamOptions: options);
+service.setVoice("Enter Voice"); //default en-US_AllisonV3Voice
+Uint8List bi = await service.toSpeech("Your Text");
+```
+* Example
+```
+void textToSpeech() async {
+    IamOptions options = await IamOptions(iamApiKey: "Your ApiKey", url: "Your Url").build();
+    TextToSpeech service = new TextToSpeech(iamOptions: options);
+    service.setVoice("en-US_AllisonV3Voice");
+    Uint8List bi = await service.toSpeech(text);
+}
+```
+* Get List Languages
+```
+IamOptions options = await IamOptions(iamApiKey: "Your ApiKey", url: "Your Url").build();
+TextToSpeech service = new TextToSpeech(iamOptions: options);
+List<Voice> listVoice = await service.getListVoices();
+```
+
+
 
 ## Getting Started
 

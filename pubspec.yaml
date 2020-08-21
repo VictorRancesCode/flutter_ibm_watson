@@ -1,21 +1,21 @@
 name: flutter_ibm_watson
 description: The flutter_ibm_watson makes it easy to integrate IBM Watson
-version: 0.0.3
+version: 0.0.4
 homepage: https://github.com/VictorRancesCode/flutter_ibm_watson
 
 dependencies:
-  flutter:
-    sdk: flutter
+  #flutter:
+  #  sdk: flutter
   http: ^0.12.2
   http_parser: ^3.1.4
   meta: ^1.1.8
 
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  #flutter_test:
+  #  sdk: flutter
 
-flutter:
+#flutter:
 
 environment:
   sdk: '>=2.0.0 <3.0.0'

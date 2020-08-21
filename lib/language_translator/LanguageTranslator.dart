@@ -1,5 +1,3 @@
-library flutter_ibm_watson;
-
 import 'package:flutter_ibm_watson/utils/IamOptions.dart';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;

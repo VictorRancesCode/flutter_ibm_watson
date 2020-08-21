@@ -1,3 +1,7 @@
+## [0.0.4] - TODO: 18-08-2020.
+
+* TODO: Add service Text to Speech
+
 ## [0.0.3] - TODO: 18-08-2020.
 
 * TODO: Fix VisualRecognition
